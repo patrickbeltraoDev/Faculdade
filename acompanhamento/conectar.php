@@ -12,10 +12,10 @@
 
 
 
-    $servidor = "localhost";
-    $banco = "databaseglobal";
+    $servidor = "localhost:3306";
+    $banco = "faculdade";
     $usuario = "root";
-    $senha = "";
+    $senha = "Paradoxo@555";
     
     $link = mysqli_connect($servidor, $usuario, $senha, $banco) or die ("Erro de conexão");
 
