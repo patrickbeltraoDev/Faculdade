@@ -1,6 +1,31 @@
+<?php
+
+    include_once('../conectar.php');
 
 
-
+    if(isset($_POST['tema1'])){
+        $tema = $_POST['tema1'];
+        $sql = "UPDATE faculdade.acm set tema1 = '$tema' where semestre = 3 and disciplina = 'ENGENHARIA DE SOFTWARE'";
+        $qr = mysqli_query($link, $sql);
+    }if(isset($_POST['tema2'])){
+        $tema = $_POST['tema2'];
+        $sql = "UPDATE faculdade.acm set tema2 = '$tema' where semestre = 3 and disciplina = 'ENGENHARIA DE SOFTWARE'";
+        $qr = mysqli_query($link, $sql);
+    }if(isset($_POST['tema3'])){
+        $tema = $_POST['tema3'];
+        $sql = "UPDATE faculdade.acm set tema2 = '$tema' where semestre = 3 and disciplina = 'ENGENHARIA DE SOFTWARE'";
+        $qr = mysqli_query($link, $sql);
+    }if(isset($_POST['tema4'])){
+        $tema = $_POST['tema4'];
+        $sql = "UPDATE faculdade.acm set tema2 = '$tema' where semestre = 3 and disciplina = 'ENGENHARIA DE SOFTWARE'";
+        $qr = mysqli_query($link, $sql);
+    }if(isset($_POST['tema5'])){
+        $tema = $_POST['tema5'];
+        $sql = "UPDATE faculdade.acm set tema2 = '$tema' where semestre = 3 and disciplina = 'ENGENHARIA DE SOFTWARE'";
+        $qr = mysqli_query($link, $sql);
+    }
+    
+?>
 
 
 
@@ -38,7 +63,30 @@
       }
     </script>
 
-</head>
+    <script>
+        document.addEventListener("DOMContentLoaded", function(){
+
+            var checkbox = document.querySelectorAll("input[type='checkbox']");
+
+            for(var item of checkbox){
+                item.addEventListener("click", function(){
+                    localStorage.s_item ? // verifico se existe localStorage
+                        localStorage.s_item = localStorage.s_item.indexOf(this.id+",") == -1 // verifico de localStorage contém o id
+                        ? localStorage.s_item+this.id+"," // não existe. Adiciono a id no loaclStorage
+                        : localStorage.s_item.replace(this.id+",","") : // já existe, apago do localStorage
+                    localStorage.s_item = this.id+",";  // não existe. Crio com o id do checkbox
+                });
+            }
+
+            if(localStorage.s_item){ // verifico se existe localStorage
+                for(var item of checkbox){ // existe, percorro as checkbox
+                    item.checked = localStorage.s_item.indexOf(item.id+",") != -1 ? true : false; // marco true nas ids que existem no localStorage
+                }
+            }
+        });
+        </script>
+
+    </head>
     <body>
         <div class="box-container">
             <div class="box-nav">
@@ -48,7 +96,7 @@
                         <label for="tema1" class="label-buttom">
                             <span>Estruturas de Dados Heterogêneas</span>
                             <div class="box-buttom">
-                                <input type="checkbox" id="tema1" name="tema1">
+                                <input type="checkbox" id="tema1" name="tema1" value="concluido" onChange="document.getElementById('formulario').submit();">
                                 <span class="buttom"></span>
                             </div>
                         </label>
@@ -61,7 +109,7 @@
                         <label for="tema2" class="label-buttom">
                             <span>Modularização</span>
                             <div class="box-buttom">
-                                <input type="checkbox" id="tema2" name="tema3">
+                                <input type="checkbox" id="tema2" name="tema2" value="concluido" onChange="document.getElementById('formulario').submit();">
                                 <span class="buttom"></span>
                             </div>
                         </label>
@@ -74,7 +122,7 @@
                         <label for="tema3" class="label-buttom">
                             <span>Listas, Pilhas e Filas</span>
                             <div class="box-buttom">
-                                <input type="checkbox" id="tema3" name="tema3">
+                                <input type="checkbox" id="tema3" name="tema3" value="concluido" onChange="document.getElementById('formulario').submit();">
                                 <span class="buttom"></span>
                             </div>
                         </label>
@@ -87,7 +135,7 @@
                         <label for="tema4" class="label-buttom">
                             <span>Ordenação</span>
                             <div class="box-buttom">
-                                <input type="checkbox" id="tema4" name="tema4">
+                                <input type="checkbox" id="tema4" name="tema4" value="concluido" onChange="document.getElementById('formulario').submit();">
                                 <span class="buttom"></span>
                             </div>
                         </label>
@@ -100,7 +148,7 @@
                         <label for="tema5" class="label-buttom">
                             <span>Árvores</span>
                             <div class="box-buttom">
-                                <input type="checkbox" id="tema5" name="tema5">
+                                <input type="checkbox" id="tema5" name="tema5" value="concluido" onChange="document.getElementById('formulario').submit();">
                                 <span class="buttom"></span>
                             </div>
                         </label>

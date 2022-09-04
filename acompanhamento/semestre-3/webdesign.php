@@ -1,29 +1,31 @@
 <?php
 
-    include('../conectar.php');
+    include_once('../conectar.php');
+
 
     if(isset($_POST['tema1'])){
-        $valor1 = $_POST['tema1'];
-        $sql = mysqli_query($link, "UPDATE faculdade.database SET status = 1 where disciplina = 'webDesign' and tema = 'tema1';");
-        if($sql){
-            echo 'Cadastro realizado com Sucesso!!!';
-        }else{
-            echo 'Cadastro não Realizado!!!';
-        }
-    }else{
-        $sql = mysqli_query($link, "UPDATE faculdade.database SET status = 0 where disciplina = 'webDesign' and tema = 'tema1';");
+        $tema = $_POST['tema1'];
+        $sql = "UPDATE faculdade.acm set tema1 = '$tema' where semestre = 3 and disciplina = 'ENGENHARIA DE SOFTWARE'";
+        $qr = mysqli_query($link, $sql);
+    }if(isset($_POST['tema2'])){
+        $tema = $_POST['tema2'];
+        $sql = "UPDATE faculdade.acm set tema2 = '$tema' where semestre = 3 and disciplina = 'ENGENHARIA DE SOFTWARE'";
+        $qr = mysqli_query($link, $sql);
+    }if(isset($_POST['tema3'])){
+        $tema = $_POST['tema3'];
+        $sql = "UPDATE faculdade.acm set tema2 = '$tema' where semestre = 3 and disciplina = 'ENGENHARIA DE SOFTWARE'";
+        $qr = mysqli_query($link, $sql);
+    }if(isset($_POST['tema4'])){
+        $tema = $_POST['tema4'];
+        $sql = "UPDATE faculdade.acm set tema2 = '$tema' where semestre = 3 and disciplina = 'ENGENHARIA DE SOFTWARE'";
+        $qr = mysqli_query($link, $sql);
+    }if(isset($_POST['tema5'])){
+        $tema = $_POST['tema5'];
+        $sql = "UPDATE faculdade.acm set tema2 = '$tema' where semestre = 3 and disciplina = 'ENGENHARIA DE SOFTWARE'";
+        $qr = mysqli_query($link, $sql);
     }
-
-    $verifica = mysqli_query($link, "SELECT * FROM faculdade.database where disciplina = 'webDesign' and tema = 'tema1';");
-    foreach($verifica as $key){
-        if($key['status'] == 1){
-            $_POST['tema1'] = 'on';
-        }
-    }
-
-
+    
 ?>
-
 
 
 <!DOCTYPE html>
@@ -60,6 +62,29 @@
       }
     </script>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function(){
+
+            var checkbox = document.querySelectorAll("input[type='checkbox']");
+
+            for(var item of checkbox){
+                item.addEventListener("click", function(){
+                    localStorage.s_item ? // verifico se existe localStorage
+                        localStorage.s_item = localStorage.s_item.indexOf(this.id+",") == -1 // verifico de localStorage contém o id
+                        ? localStorage.s_item+this.id+"," // não existe. Adiciono a id no loaclStorage
+                        : localStorage.s_item.replace(this.id+",","") : // já existe, apago do localStorage
+                    localStorage.s_item = this.id+",";  // não existe. Crio com o id do checkbox
+                });
+            }
+
+            if(localStorage.s_item){ // verifico se existe localStorage
+                for(var item of checkbox){ // existe, percorro as checkbox
+                    item.checked = localStorage.s_item.indexOf(item.id+",") != -1 ? true : false; // marco true nas ids que existem no localStorage
+                }
+            }
+        });
+    </script>
+
 </head>
     <body>
         <div class="box-container">
@@ -70,7 +95,7 @@
                         <label for="tema1" class="label-buttom">
                             <span>A Evolução e Importância da Interface de um Website</span>
                             <div class="box-buttom">
-                                <input type="checkbox" id="tema1" name="tema1" value="<?php $valor1 ?>" onChange="document.getElementById('filtro').submit();">
+                                <input type="checkbox" id="tema1" name="tema1" value="concluido" onChange="document.getElementById('formulario').submit();">
                                 <span class="buttom"></span>
                             </div>
                         </label>
@@ -83,7 +108,7 @@
                         <label for="tema2" class="label-buttom">
                             <span>Planejamento de um Website</span>
                             <div class="box-buttom">
-                                <input type="checkbox" id="tema2" name="tema2" >
+                                <input type="checkbox" id="tema2" name="tema2" value="concluido" onChange="document.getElementById('formulario').submit();">
                                 <span class="buttom"></span>
                             </div>
                         </label>
@@ -96,7 +121,7 @@
                         <label for="tema3" class="label-buttom">
                             <span>Conceituação de um Website</span>
                             <div class="box-buttom">
-                                <input type="checkbox" id="tema3" name="tema3">
+                                <input type="checkbox" id="tema3" name="tema3" value="concluido" onChange="document.getElementById('formulario').submit();">
                                 <span class="buttom"></span>
                             </div>
                         </label>
@@ -109,7 +134,7 @@
                         <label for="tema4" class="label-buttom">
                             <span>Estruturação de um Website</span>
                             <div class="box-buttom">
-                                <input type="checkbox" id="tema4" name="tema4">
+                                <input type="checkbox" id="tema4" name="tema4" value="concluido" onChange="document.getElementById('formulario').submit();">
                                 <span class="buttom"></span>
                             </div>
                         </label>
@@ -122,7 +147,7 @@
                         <label for="tema5" class="label-buttom">
                             <span>Criação de um Website</span>
                             <div class="box-buttom">
-                                <input type="checkbox" id="tema5" name="tema5">
+                                <input type="checkbox" id="tema5" name="tema5" value="concluido" onChange="document.getElementById('formulario').submit();">
                                 <span class="buttom"></span>
                             </div>
                         </label>
